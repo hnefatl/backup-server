@@ -4,3 +4,5 @@
 /infra/terraform.tfstate*
 /infra/terraform.tfvars
 /infra/.terraform/
+
+/server/result

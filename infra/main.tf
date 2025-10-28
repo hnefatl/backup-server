@@ -1,7 +1,7 @@
 resource "oci_identity_compartment" "backup_server" {
   compartment_id = var.tenancy_id
-  name           = "backup_server_compartment"
-  description    = "backup_server_compartment"
+  name           = var.compartment_name
+  description    = "Backup server compartment"
   enable_delete  = true
 }
 
@@ -50,19 +50,6 @@ resource "oci_core_internet_gateway" "backup_server" {
   display_name   = "backup_server"
 }
 
-resource "oci_core_volume" "backup_server_data" {
-  compartment_id      = oci_core_instance.backup_server.compartment_id
-  availability_domain = oci_core_instance.backup_server.availability_domain
-  size_in_gbs         = var.data_volume_size_gb
-  display_name        = "data"
-}
-resource "oci_core_volume_attachment" "backup_server" {
-  attachment_type = "paravirtualized"
-  instance_id     = oci_core_instance.backup_server.id
-  volume_id       = oci_core_volume.backup_server_data.id
-  device          = "/dev/oracleoci/oraclevdb"
-}
-
 resource "oci_core_instance" "backup_server" {
   compartment_id      = oci_identity_compartment.backup_server.id
   availability_domain = var.availability_domain
@@ -71,7 +58,7 @@ resource "oci_core_instance" "backup_server" {
   shape = "VM.Standard.A1.Flex"
   shape_config {
     ocpus         = 1
-    memory_in_gbs = 6
+    memory_in_gbs = 8
   }
 
   create_vnic_details {
@@ -85,7 +72,7 @@ resource "oci_core_instance" "backup_server" {
   source_details {
     source_type             = "image"
     source_id               = var.vm_image
-    boot_volume_size_in_gbs = 50
+    boot_volume_size_in_gbs = 200
   }
 
   metadata = {

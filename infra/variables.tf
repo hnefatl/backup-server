@@ -2,6 +2,10 @@
 variable "tenancy_id" {
   type = string
 }
+# Support separate compartments.
+variable "compartment_name" {
+  type = string
+}
 variable "availability_domain" {
   type    = string
   default = "MEmO:UK-LONDON-1-AD-2"

@@ -21,13 +21,6 @@ OCI (Oracle Cloud Infrastructure).
 
 ## Creation
 
-1.  ```sh
-    $ tofu init
-    $ tofu apply
-    ...
-    vm_ip_address = "..."
-    ```
-
-1.  ```sh
-    $ ssh ubuntu@<public ip>
-    ```
+```sh
+$ ./init.sh
+```

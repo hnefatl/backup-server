@@ -11,8 +11,10 @@
     {
       formatter."${system}" = pkgs.nixfmt-tree;
       devShells."${system}".default = pkgs.mkShell {
-        packages = [
-          pkgs.opentofu
+        packages = with pkgs; [
+          opentofu
+          nixos-anywhere
+          openssh
         ];
       };
     };
