@@ -1,6 +1,6 @@
 /.direnv/
-/.terraform
 
 # Contains more sensitive variable values.
-/terraform.tfstate*
-/terraform.tfvars
+/infra/terraform.tfstate*
+/infra/terraform.tfvars
+/infra/.terraform/
