@@ -17,5 +17,9 @@
           openssh
         ];
       };
+      packages."${system}".default = pkgs.writeShellApplication {
+        name = "init";
+        text = pkgs.lib.readFile ./init.sh;
+      };
     };
 }
